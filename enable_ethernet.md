@@ -42,7 +42,7 @@ sudo ifconfig eth0 up
 ```
 sudo service networking restart
 ```
-6) Check if hardware included in interfaces file
+6) Check if hardware is included in interfaces file
 ```
 cat /etc/network/interfaces
 
@@ -51,11 +51,17 @@ cat /etc/network/interfaces
 # iface lo inet loopback
 ```
 
-7) If not there: add it
+*Note: If it is missing, perform the following:
+
+1) Open the interfaces file
+```
+sudo nano /etc/network/interfaces
+```
+2) Append the necessary data
 ```
 # The primary network interface
 auto eth0
 iface eth0 inet dhcp
 ```
 
-https://ubuntuforums.org/showthread.php?t=2034067
+For more info see the [Forum Post](https://ubuntuforums.org/showthread.php?t=2034067)
