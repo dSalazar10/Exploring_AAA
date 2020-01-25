@@ -2,13 +2,17 @@ Ubuntu Server - enable ethernet
 
 1) Determine which logical name your eth port is called
 ```
+ifconfig -a
+```
+2) Determine factory info about Ethernet Hardware
+```
 lspci -nnk | grep -iA2 eth
 
 02:00.0 Ethernet controller [0200]: Atheros Communications Inc. AR8151 v2.0 Gigabit Ethernet [1969:1083] (rev c0)
 Subsystem: Giga-byte Technology Device [1458:e000]
 Kernel driver in use: atl1c
 ```
-2) Determine hardware information
+3) Determine hardware information
 ```
 sudo lshw -C network
 
@@ -29,16 +33,16 @@ configuration: autonegotiation=on broadcast=yes driver=atl1c driverversion=1.0.1
 resources: irq:18 memory:fddc000-fddfffff ioport:df00(size=128)
 ```
 
-3) If Ethernet is disabled: enable Ethernet
+4) If Ethernet is disabled: enable Ethernet
 ```
 sudo ifconfig eth0 up
 ```
 
-4) Restart networking
+5) Restart networking
 ```
 sudo service networking restart
 ```
-5) Check if hardware included in interfaces file
+6) Check if hardware included in interfaces file
 ```
 cat /etc/network/interfaces
 
@@ -47,7 +51,7 @@ cat /etc/network/interfaces
 # iface lo inet loopback
 ```
 
-6) If not there: add it
+7) If not there: add it
 ```
 # The primary network interface
 auto eth0
