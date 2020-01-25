@@ -8,6 +8,7 @@ lspci -nnk | grep -iA2 eth
 Subsystem: Giga-byte Technology Device [1458:e000]
 Kernel driver in use: atl1c
 ```
+2) Determine hardware information
 ```
 sudo lshw -C network
 
@@ -28,13 +29,29 @@ configuration: autonegotiation=on broadcast=yes driver=atl1c driverversion=1.0.1
 resources: irq:18 memory:fddc000-fddfffff ioport:df00(size=128)
 ```
 
-2) Enable Ethernet
+3) If Ethernet is disabled: enable Ethernet
 ```
 sudo ifconfig eth0 up
 ```
 
-3) Restart networking
+4) Restart networking
 ```
 sudo service networking restart
 ```
+5) Check if hardware included in interfaces file
+```
+cat /etc/network/interfaces
+
+# The loopback network interface
+# auto lo
+# iface lo inet loopback
+```
+
+6) If not there: add it
+```
+# The primary network interface
+auto eth0
+iface eth0 inet dhcp
+```
+
 https://ubuntuforums.org/showthread.php?t=2034067
